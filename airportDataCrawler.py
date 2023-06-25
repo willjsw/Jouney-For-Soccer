@@ -22,13 +22,14 @@ def crawlNearestAirport(stadium):
     try:
         driver.get('https://www.google.com/maps')
         searchPhrase = "Nearest Airport from "+stadium
-        searchBox = driver.find_element(By.XPATH, '//*[@id="searchboxinput"]')
+        searchBox = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="searchboxinput"]')))
         searchBox.send_keys(searchPhrase)
         searchBox.send_keys(Keys.ENTER)
-        airport = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="QA0Szd"]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div/div[1]/h2/span')))
-        return airport.text
+        airportKor = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="QA0Szd"]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div/div[1]/div[1]/h1')))
+        airportLocal = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="QA0Szd"]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div/div[1]/h2/span')))
+        return [airportLocal.text,airportKor.text]
     except Exception as e:
-        print("크롤링 실패")
+        print(e)
         return None
     finally:
         driver.quit()

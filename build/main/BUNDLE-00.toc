@@ -1,0 +1,3 @@
+([('main',
+   '/Users/sunwoo/Desktop/Code/Project/journey for soccer/dist/main',
+   'EXECUTABLE')],)
